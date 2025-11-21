@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abu's Studio | Professional Portfolio</title>
+    <meta name="description" content="Developer & Automation Expert. I build purposeful codes that turn data into action.">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta property="og:title" content="Abu's Studio | Developer & Modder">
+    <meta property="og:description" content="Check out my portfolio. I specialize in Web Dev, App Dev, and Automation.">
+    <meta property="og:image" content="thumbnail.jpg">
+    <!-- <meta property="og:url" content="https://abus-studio.github.io/"> -->
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- 1. RESET & VARIABLES --- */
+        :root {
+            --bg-dark: #050505;
+            --bg-card: rgba(20, 20, 20, 0.6);
+            --primary: #7c3aed; /* Violet */
+            --secondary: #2dd4bf; /* Teal */
+            --text-white: #ffffff;
+            --text-gray: #9ca3af;
+            --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ul, li { list-style: none !important; padding: 0; margin: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* --- 2. BACKGROUND EFFECTS --- */
+        .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: move 20s infinite alternate; }
+        .blob-1 { width: 500px; height: 500px; background: var(--primary); top: -10%; left: -10%; }
+        .blob-2 { width: 400px; height: 400px; background: var(--secondary); bottom: 10%; right: -10%; animation-delay: -5s; }
+        @keyframes move { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(20px, 40px) rotate(20deg); } }
+
+        /* --- 3. NAVIGATION (DESKTOP) --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1.2rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(10px);
+            border-bottom: var(--border-glass); z-index: 1000;
+            transition: 0.3s;
+        }
+        .logo { font-size: 1.8rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+        .nav-links a { color: var(--text-white); text-decoration: none; font-weight: 500; transition: 0.3s; position: relative; display: flex; align-items: center; gap: 8px; }
+        .nav-links a:hover { color: var(--secondary); }
+        .nav-links a i { display: none; } 
+        .sidebar-header { display: none; }
+        .hamburger { display: none; font-size: 1.8rem; cursor: pointer; color: #fff; z-index: 1002; transition: 0.3s; }
+
+        /* --- 4. HERO SECTION --- */
+        .hero { min-height: 100vh; padding: 8rem 10% 4rem; display: flex; align-items: center; justify-content: space-between; gap: 4rem; }
+        .hero-text { flex: 1; }
+        .hero-text h2 { font-size: 1.5rem; color: var(--secondary); font-weight: 600; margin-bottom: 0.5rem; }
+        .hero-text h1 { font-size: 4rem; line-height: 1.1; font-weight: 800; margin-bottom: 1rem; }
+        .hero-text p { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2rem; max-width: 500px; }
+        .typing-wrapper { height: 2rem; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .hero-img { flex: 1; display: flex; justify-content: center; position: relative; }
+        .hero-img img { width: 350px; height: 350px; object-fit: cover; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; border: 2px solid rgba(255,255,255,0.1); box-shadow: 0 0 50px rgba(124, 58, 237, 0.3); animation: morph 8s ease-in-out infinite; background: #1a1a1a; }
+        @keyframes morph { 0% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40%/50% 60% 30% 60%; } 100% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; } }
+        
+        .btn-group { display: flex; gap: 1rem; }
+        .btn { padding: 12px 30px; border-radius: 50px; font-weight: 600; text-decoration: none; transition: 0.3s; border: none; cursor: pointer; }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4); }
+        .btn-primary:hover { transform: translateY(-3px); background: #6d28d9; }
+        .btn-sec { background: rgba(255,255,255,0.1); border: 1px solid #fff; color: #fff; }
+        .btn-sec:hover { background: rgba(255,255,255,0.15); }
+
+        /* --- 5. SECTIONS --- */
+        section { padding: 6rem 10%; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .section-header span { color: var(--primary); }
+        .section-header p { color: var(--text-gray); }
+
+        /* Stats */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; padding: 2rem 10%; background: rgba(255,255,255,0.02); }
+        .stat-item { text-align: center; }
+        .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--secondary); }
+        .stat-desc { font-size: 0.9rem; color: var(--text-gray); }
+
+        /* About, Skills, Services, Timeline, Projects */
+        .about-container { display: flex; gap: 4rem; align-items: center; }
+        .about-text { flex: 1; } .about-text p { margin-bottom: 1.5rem; color: var(--text-gray); }
+        .skills-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1rem; }
+        .skill-card { background: var(--bg-card); border: var(--border-glass); padding: 1.5rem; border-radius: 12px; text-align: center; transition: 0.3s; }
+        .skill-card:hover { border-color: var(--secondary); transform: translateY(-5px); }
+        .skill-card i { font-size: 2rem; margin-bottom: 0.5rem; color: var(--text-white); }
+        .skill-card span { display: block; font-size: 0.85rem; color: var(--text-gray); }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .service-card { background: var(--bg-card); padding: 2rem; border-radius: 15px; border: var(--border-glass); transition: 0.3s; }
+        .service-card:hover { background: rgba(124, 58, 237, 0.1); transform: translateY(-10px); }
+        .service-icon { width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; color: #fff; }
+        
+        .timeline { border-left: 2px solid var(--border-glass); margin-left: 10px; }
+        .timeline-item { margin-bottom: 3rem; padding-left: 2rem; position: relative; }
+        .timeline-item::before { content: ''; position: absolute; left: -9px; top: 5px; width: 16px; height: 16px; background: var(--bg-dark); border: 2px solid var(--secondary); border-radius: 50%; }
+        .timeline-date { font-size: 0.9rem; color: var(--secondary); margin-bottom: 0.5rem; display: block; }
+        .timeline-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem; }
+        
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+        .project-card { background: var(--bg-card); border-radius: 15px; overflow: hidden; border: var(--border-glass); transition: 0.4s; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
+        .p-img { width: 100%; height: 200px; background: #222; overflow: hidden; position: relative; }
+        .p-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .project-card:hover .p-img img { transform: scale(1.1); }
+        .p-info { padding: 1.5rem; } .p-tags { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .tag { font-size: 0.75rem; background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 20px; }
+        .p-link { color: var(--secondary); text-decoration: none; font-weight: 600; }
+
+        /* --- 6. CONTACT & POPUP MODAL CSS --- */
+        .contact-section { display: flex; gap: 3rem; flex-wrap: wrap; }
+        .contact-info { flex: 1; min-width: 300px; }
+        .contact-form { flex: 1.5; min-width: 300px; }
+        .info-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+        .info-item i { width: 50px; height: 50px; background: rgba(124, 58, 237, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem; }
+        form input, form textarea { width: 100%; padding: 1rem; margin-bottom: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: #fff; font-family: inherit; }
+        form input:focus, form textarea:focus { outline: none; border-color: var(--primary); background: rgba(255,255,255,0.05); }
+
+        /* SUCCESS MODAL STYLES */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 2000;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .success-modal {
+            background: #151515; padding: 2.5rem; border-radius: 20px;
+            text-align: center; border: 1px solid var(--border-glass);
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
+            transform: scale(0.8); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 90%; width: 400px;
+        }
+        .modal-overlay.active .success-modal { transform: scale(1); }
+        
+        .modal-icon { 
+            width: 70px; height: 70px; background: rgba(45, 212, 191, 0.15); 
+            color: var(--secondary); border-radius: 50%; margin: 0 auto 1.5rem;
+            display: flex; align-items: center; justify-content: center; font-size: 2rem;
+        }
+        .modal-title { font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+        .modal-desc { color: var(--text-gray); margin-bottom: 2rem; font-size: 0.95rem; }
+        
+        /* Navigation Overlay for Mobile */
+        .menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+            z-index: 999; opacity: 0; visibility: hidden; transition: 0.3s;
+        }
+        .menu-overlay.active { opacity: 1; visibility: visible; }
+
+        /* Footer */
+        footer { text-align: center; padding: 4rem 2rem; border-top: var(--border-glass); background: #020202; margin-top: 4rem; }
+        .social-links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem; font-size: 1.5rem; }
+        .social-links a { color: var(--text-gray); transition: 0.3s; } .social-links a:hover { color: var(--primary); transform: translateY(-3px); }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .hamburger { display: block; z-index: 1001; }
+            .nav-links {
+                position: fixed; top: 0; left: -100%; width: 280px; height: 100vh;
+                background: #050505; flex-direction: column; align-items: flex-start;
+                padding: 20px; gap: 10px; transition: 0.4s; box-shadow: 5px 0 15px rgba(0,0,0,0.5); z-index: 1000;
+            }
+            .nav-links.active { left: 0; }
+            .sidebar-header { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-glass); }
+            .sidebar-header img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); margin-right: 10px; }
+            .sidebar-header h3 { font-size: 1.1rem; font-weight: 700; color: #fff; flex: 1; }
+            .close-btn { font-size: 1.5rem; cursor: pointer; color: #999; }
+            .nav-links li { width: 100%; }
+            .nav-links a { display: flex; align-items: center; padding: 12px 15px; color: #ccc; font-size: 1rem; border-radius: 8px; transition: 0.3s; }
+            .nav-links a i { display: inline-block; width: 25px; margin-right: 10px; color: var(--primary); font-size: 1.1rem; }
+            .nav-links a:hover { background: rgba(255,255,255,0.05); color: #fff; }
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 6rem; gap: 2rem; }
+            .hero-text h1 { font-size: 2.8rem; }
+            .hero-img img { width: 280px; height: 280px; }
+            .btn-group { justify-content: center; }
+            .typing-wrapper { display: flex; justify-content: center; }
+            .about-container { flex-direction: column; }
+            section { padding: 4rem 5%; }
+            .stats { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .skills-grid { width: 100%; grid-template-columns: repeat(3, 1fr) !important; gap: 0.8rem; }
+            .skill-card { padding: 1rem 0.5rem; } .skill-card i { font-size: 1.5rem; } .skill-card span { font-size: 0.75rem; }
+        }
+
+        /* Animations */
+        .hidden { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .show { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div id="success-modal" class="modal-overlay">
+        <div class="success-modal">
+            <div class="modal-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 class="modal-title">Message Sent!</h3>
+            <p class="modal-desc">Thank you for reaching out. I will get back to you as soon as possible.(If want to send real message then contact on Instagram)</p>
+            <button class="btn btn-primary" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <div class="menu-overlay" onclick="toggleMenu()"></div>
+
+    <div class="bg-glow">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav>
+        <div class="logo">Abu's Studio</div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <ul class="nav-links">
+            <li class="sidebar-header">
+                <div style="display:flex; align-items:center;">
+                    <img src="https://i.ibb.co/pjmgmnkT/x.jpg" alt="Profile">
+                    <h3>Abu's Studio</h3>
+                </div>
+                <div class="close-btn" onclick="toggleMenu()">
+                    <i class="fas fa-times"></i>
+                </div>
+            </li>
+
+            <li><a href="#home" onclick="toggleMenu()"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about" onclick="toggleMenu()"><i class="far fa-user"></i> About</a></li>
+            <li><a href="#work" onclick="toggleMenu()"><i class="fas fa-folder-open"></i> Projects</a></li>
+            <li><a href="#services" onclick="toggleMenu()"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li><a href="#experience" onclick="toggleMenu()"><i class="fas fa-briefcase"></i> Experience</a></li>
+            <li><a href="#about" onclick="toggleMenu()"><i class="fas fa-chart-bar"></i> Skills</a></li>
+            <li><a href="#contact" onclick="toggleMenu()"><i class="far fa-envelope"></i> Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-text hidden">
+            <h2>Welcome to my world</h2>
+            <h1>Hi, I'm <span style="color:var(--primary)">ABU UBAIDAH</span></h1>
+            <div class="typing-wrapper">
+                <span id="typewriter"></span>
+            </div>
+            <p>I build purposeful codes that turn data into action. This is where intelligence meets execution.</p>
+            <div class="btn-group">
+                <a href="#contact" class="btn btn-primary">Hire Me</a>
+                <a href="#work" class="btn btn-sec">View Work</a>
+            </div>
+        </div>
+        <div class="hero-img hidden">
+            <img src="https://i.ibb.co/pjmgmnkT/x.jpg" alt="Developer Profile">
+        </div>
+    </header>
+
+    <div class="stats">
+        <div class="stat-item hidden">
+            <div class="stat-num">1+</div>
+            <div class="stat-desc">Years Experience</div>
+        </div>
+        <div class="stat-item hidden">
+            <div class="stat-num">10+</div>
+            <div class="stat-desc">Projects Done</div>
+        </div>
+        <div class="stat-item hidden">
+            <div class="stat-num">24/7</div>
+            <div class="stat-desc">Support</div>
+        </div>
+    </div>
+
+    <section id="about">
+        <div class="section-header hidden">
+            <h2>About <span>Me</span></h2>
+            <p>My technical level and bio</p>
+        </div>
+        <div class="about-container hidden">
+            <div class="about-text">
+                <h3>I am a passionate Developer</h3>
+                <p>I specialize in building high-quality software. My journey started 1 years ago, and I have since worked with various technologies to bring ideas to life.</p>
+                <p>I love solving complex problems and learning new technologies. When I'm not coding, you can find me gaming or exploring the city.</p>
+                <a href="#" class="btn btn-sec">Download CV</a>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-card"><i class="fab fa-html5" style="color:#e34c26;"></i><span>HTML</span></div>
+                <div class="skill-card"><i class="fab fa-css3-alt" style="color:#264de4;"></i><span>CSS</span></div>
+                <div class="skill-card"><i class="fab fa-js" style="color:#f0db4f;"></i><span>JavaScript</span></div>
+                <div class="skill-card"><i class="fab fa-react" style="color:#61dbfb;"></i><span>React</span></div>
+                <div class="skill-card"><i class="fab fa-node-js" style="color:#3c873a;"></i><span>Node JS</span></div>
+                <div class="skill-card"><i class="fab fa-java" style="color:#5382a1;"></i><span>Java</span></div>
+                <div class="skill-card"><i class="fas fa-copyright" style="color:#a8b9cc;"></i><span>C</span></div>
+                <div class="skill-card"><i class="fas fa-code" style="color:#00599c;"></i><span>C++</span></div>
+                <div class="skill-card"><i class="fab fa-python" style="color:#ffe873;"></i><span>Python</span></div>
+                <div class="skill-card"><i class="fas fa-terminal" style="color:#4EAA25;"></i><span>Bash</span></div>
+                <div class="skill-card"><i class="fas fa-database" style="color:#00758F;"></i><span>SQL</span></div>
+                <div class="skill-card"><i class="fas fa-flask" style="color:#ffffff;"></i><span>Flask</span></div>
+                <div class="skill-card"><i class="fab fa-php" style="color:#787CB5;"></i><span>PHP</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="section-header hidden">
+            <h2>My <span>Services</span></h2>
+            <p>What I offer to my clients</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card hidden">
+                <div class="service-icon"><i class="fas fa-code"></i></div>
+                <h3>Web Development</h3>
+                <p>Building fast, responsive, and secure websites using modern technologies like Node.js and React.</p>
+            </div>
+            <div class="service-card hidden">
+                <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Mobile App Development</h3>
+                <p>Building intuitive, high-performance mobile applications for Android platforms.</p>
+            </div>
+            <div class="service-card hidden">
+                <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                <h3>Automation & Tools</h3>
+                <p>Streamlining workflows, API integration, and eliminating repetitive tasks through custom automated solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="section-header hidden">
+            <h2>My <span>Journey</span></h2>
+            <p>A timeline of my professional career</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item hidden">
+                <span class="timeline-date">2023 - 2024</span>
+                <h3 class="timeline-title">Web Developer</h3>
+                <p class="timeline-desc">Architecting responsive, user-centric websites and web applications using modern full-stack technologies.</p>
+            </div>
+            <div class="timeline-item hidden">
+                <span class="timeline-date">2021 - 2023</span>
+                <h3 class="timeline-title">Mobile App Developer</h3>
+                <p class="timeline-desc">Engineered high-performance native and cross-platform mobile applications for Android.</p>
+            </div>
+            <div class="timeline-item hidden">
+                <span class="timeline-date">2019 - 2021</span>
+                <h3 class="timeline-title">Automation & Tools</h3>
+                <p class="timeline-desc">Developed custom scripts, API integration, and utility tools to automate repetitive tasks and streamline development workflows.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <div class="section-header hidden">
+            <h2>Featured <span>Projects</span></h2>
+            <p>Some of my best work</p>
+        </div>
+        <div class="grid-container">
+            <div class="project-card hidden">
+                <div class="p-img"><img src="https://i.ibb.co/G38VKnc0/x.png" alt="Project"></div>
+                <div class="p-info">
+                    <h3>Nexus Kernel</h3>
+                    <div class="p-tags"><span class="tag">React</span><span class="tag">Node</span></div>
+                    <p style="color:#aaa; font-size:0.9rem; margin: 10px 0;">A suite of Al-powered tools for developers and students.</p>
+                    <a href="https://nexuskernel.vercel.app/" target="_blank" rel="noopener noreferrer" class="p-link">View Case Study &rarr;</a>
+                </div>
+            </div>
+            <div class="project-card hidden">
+                <div class="p-img"><img src="https://i.ibb.co/Jjdvg8Gm/x.png" alt="Project"></div>
+                <div class="p-info">
+                    <h3>Nazm AI</h3>
+                    <div class="p-tags"><span class="tag">Node</span><span class="tag">React Native</span></div>
+                    <p style="color:#aaa; font-size:0.9rem; margin: 10px 0;">Generate beautiful poems and shayari with Al, from images or themes.</p>
+                    <a href="https://nazmai.vercel.app/" target="_blank" rel="noopener noreferrer" class="p-link">View Case Study &rarr;</a>
+                </div>
+            </div>
+            <div class="project-card hidden">
+                <div class="p-img"><img src="https://i.ibb.co/SXt717rH/x.png" alt="Project"></div>
+                <div class="p-info">
+                    <h3>Narrative Fables</h3>
+                    <div class="p-tags"><span class="tag">Node</span><span class="tag">React</span></div>
+                    <p style="color:#aaa; font-size:0.9rem; margin: 10px 0;">An Al-powered tool to co-write stories and visualize them.</p>
+                    <a href="https://narrativefables.vercel.app/" target="_blank" rel="noopener noreferrer" class="p-link">View Case Study &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header hidden">
+            <h2>Get In <span>Touch</span></h2>
+            <p>Let's work together</p>
+        </div>
+        <div class="contact-section hidden">
+            <div class="contact-info">
+                <div class="info-item"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>agent_x_ghostxx@proton.me</p></div></div>
+                <div class="info-item"><i class="fas fa-phone"></i><div><h4>Phone</h4><p>+91 00000 00000</p></div></div>
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i><div><h4>Location</h4><p>India</p></div></div>
+            </div>
+            <form class="contact-form" onsubmit="sendMessage(event)">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="5" placeholder="Message" required></textarea>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <h2>Abu's Studio</h2>
+            <p style="margin: 1rem 0;">Broken code taught me more than perfect days.</p>
+            <div class="social-links">
+                <a href="https://github.com/SysXH4x0r/" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/abusstudio" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i></a>
+                <a href="https://instagram.com/agent_x_ghostxx" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <p style="margin-top: 3rem; opacity: 0.6; font-size: 0.8rem;">&copy; 2025 Abu's Studio. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 1. TYPING EFFECT
+        const words = ["Developer", "Modder", "Freelancer"];
+        let i = 0;
+        let timer;
+        function typeWriter() {
+            const heading = document.getElementById("typewriter");
+            if(!heading) return;
+            let word = words[i];
+            let letters = word.split("");
+            heading.innerHTML = "";
+            let loopTyping = function() {
+                if (letters.length > 0) {
+                    heading.innerHTML += letters.shift();
+                } else {
+                    setTimeout(erase, 2000);
+                    return;
+                }
+                setTimeout(loopTyping, 150);
+            };
+            loopTyping();
+        }
+        function erase() {
+            const heading = document.getElementById("typewriter");
+            if(!heading) return;
+            let letters = heading.innerHTML.split("");
+            let loopErasing = function() {
+                if (letters.length > 0) {
+                    letters.pop();
+                    heading.innerHTML = letters.join("");
+                } else {
+                    i = (i + 1) % words.length;
+                    typeWriter();
+                    return;
+                }
+                setTimeout(loopErasing, 100);
+            };
+            loopErasing();
+        }
+        typeWriter();
+
+        // 2. MENU TOGGLE (Includes Overlay)
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            const overlay = document.querySelector('.menu-overlay');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // 3. SCROLL ANIMATION
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        });
+        const hiddenElements = document.querySelectorAll('.hidden');
+        hiddenElements.forEach((el) => observer.observe(el));
+
+        // 4. SUCCESS MESSAGE LOGIC (Pop-up & Clear Form)
+        function sendMessage(event) {
+            event.preventDefault(); // Prevent page reload
+            
+            // Show Custom Modal
+            const modal = document.getElementById('success-modal');
+            modal.classList.add('active');
+
+            // Clear Form Fields
+            event.target.reset(); 
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('success-modal');
+            modal.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
